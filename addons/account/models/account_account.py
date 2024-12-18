@@ -23,7 +23,7 @@ class AccountAccount(models.Model):
     _order = "code, placeholder_code"
     _check_company_auto = True
     _check_company_domain = models.check_companies_domain_parent_of
-    """probando commit"""
+    
     @api.constrains('account_type', 'reconcile')
     def _check_reconcile(self):
         for account in self:
