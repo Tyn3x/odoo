@@ -737,7 +737,10 @@ export class PosOrder extends Base {
                     sum +=
                         orderLine.get_all_prices().priceWithTaxBeforeDiscount -
                         orderLine.get_all_prices().priceWithTax;
-                    if (orderLine.display_discount_policy() === "without_discount") {
+                    if (
+                        orderLine.display_discount_policy() === "without_discount" &&
+                        !(orderLine.price_type === "manual")
+                    ) {
                         sum +=
                             (orderLine.get_taxed_lst_unit_price() -
                                 orderLine.getUnitDisplayPriceBeforeDiscount()) *
@@ -945,7 +948,7 @@ export class PosOrder extends Base {
 
     //see set_screen_data
     get_screen_data() {
-        const screen = this.uiState?.screen_data["value"];
+        const screen = this.uiState?.screen_data?.["value"];
         // If no screen data is saved
         //   no payment line -> product screen
         //   with payment line -> payment screen
